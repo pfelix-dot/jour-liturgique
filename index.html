@@ -72,30 +72,66 @@
       <p class="texte">Ajoute les jours de ton choix à l’agenda de ton téléphone. Il te préviendra à l’heure choisie.</p>
       <fieldset class="categories" id="opt-categories">
         <legend>Me prévenir pour</legend>
-        <label class="case">
-          <input type="checkbox" value="dimanche" checked>
-          <span><b>Les dimanches</b><small>Chaque dimanche, avec son nom et sa couleur.</small></span>
-        </label>
-        <label class="case">
-          <input type="checkbox" value="solennite" checked>
-          <span><b>Les solennités</b><small>Noël, Épiphanie, Pâques, Ascension, Pentecôte, Toussaint, Assomption, Immaculée Conception…</small></span>
-        </label>
-        <label class="case">
-          <input type="checkbox" value="fete-seigneur" checked>
-          <span><b>Les fêtes du Seigneur</b><small>Baptême du Seigneur, Sainte Famille, Présentation, Transfiguration, Croix glorieuse, Dédicace du Latran.</small></span>
-        </label>
-        <label class="case">
-          <input type="checkbox" value="particulier" checked>
-          <span><b>Les célébrations particulières</b><small>Mercredi des Cendres, Jeudi saint, Vendredi saint, Samedi saint, fidèles défunts (2 novembre).</small></span>
-        </label>
-        <label class="case">
-          <input type="checkbox" value="debut" checked>
-          <span><b>Les débuts de temps liturgiques</b><small>Avent, Noël, Carême, Semaine sainte, temps pascal, Temps ordinaire.</small></span>
-        </label>
-        <label class="case">
-          <input type="checkbox" value="saint">
-          <span><b>Les fêtes des apôtres et des saints</b><small>Saint Paul, saint Marc, saint Jacques, saint Laurent, saint André… (en semaine).</small></span>
-        </label>
+        <div class="cat">
+          <label class="case">
+            <input type="checkbox" value="dimanche" checked>
+            <span><b>Les dimanches</b><small>Chaque dimanche, avec son nom et sa couleur.</small></span>
+          </label>
+          <details class="cat-info">
+            <summary>À quoi ça sert ?</summary>
+            <p>Le dimanche est le jour du Seigneur et le service principal de la semaine. Le rappel te donne le nom du dimanche (par exemple « 3e dimanche de l’Avent ») et sa couleur, pour savoir quelle messe préparer dans le missel et quels ornements sortir.</p>
+          </details>
+        </div>
+        <div class="cat">
+          <label class="case">
+            <input type="checkbox" value="solennite" checked>
+            <span><b>Les solennités</b><small>Noël, Épiphanie, Pâques, Ascension, Pentecôte, Toussaint, Assomption, Immaculée Conception…</small></span>
+          </label>
+          <details class="cat-info">
+            <summary>À quoi ça sert ?</summary>
+            <p>Les solennités sont les plus grandes célébrations de l’année. Beaucoup tombent en semaine (Ascension, Toussaint, Assomption, Immaculée Conception…) : la messe est alors aussi festive qu’un dimanche, avec Gloria, Credo, parfois l’encens, et souvent plus de servants. Ce sont les jours qu’on risque le plus d’oublier.</p>
+          </details>
+        </div>
+        <div class="cat">
+          <label class="case">
+            <input type="checkbox" value="fete-seigneur" checked>
+            <span><b>Les fêtes du Seigneur</b><small>Baptême du Seigneur, Sainte Famille, Présentation, Transfiguration, Croix glorieuse, Dédicace du Latran.</small></span>
+          </label>
+          <details class="cat-info">
+            <summary>À quoi ça sert ?</summary>
+            <p>Ces fêtes célèbrent le Christ lui-même. Contrairement aux fêtes des saints, elles peuvent remplacer un dimanche du Temps ordinaire : ce jour-là, on ne prend pas la messe du dimanche mais celle de la fête, avec une autre couleur. Le rappel évite de préparer la mauvaise messe.</p>
+          </details>
+        </div>
+        <div class="cat">
+          <label class="case">
+            <input type="checkbox" value="particulier" checked>
+            <span><b>Les célébrations particulières</b><small>Mercredi des Cendres, Jeudi saint, Vendredi saint, Samedi saint, fidèles défunts (2 novembre).</small></span>
+          </label>
+          <details class="cat-info">
+            <summary>À quoi ça sert ?</summary>
+            <p>Ce ne sont pas des messes comme les autres : imposition des cendres, lavement des pieds, procession au reposoir, vénération de la croix, Vigile pascale avec le feu nouveau et le cierge pascal, messe pour les défunts. Elles ont leurs propres gestes et demandent souvent une répétition à l’avance.</p>
+          </details>
+        </div>
+        <div class="cat">
+          <label class="case">
+            <input type="checkbox" value="debut" checked>
+            <span><b>Les débuts de temps liturgiques</b><small>Avent, Noël, Carême, Semaine sainte, temps pascal, Temps ordinaire.</small></span>
+          </label>
+          <details class="cat-info">
+            <summary>À quoi ça sert ?</summary>
+            <p>Chaque temps liturgique a sa couleur et sa partie du missel. Le jour où un temps commence, la couleur des ornements change (violet pour l’Avent et le Carême, blanc pour Noël et Pâques, vert pour le Temps ordinaire) et il faut déplacer les signets du missel.</p>
+          </details>
+        </div>
+        <div class="cat">
+          <label class="case">
+            <input type="checkbox" value="saint">
+            <span><b>Les fêtes des apôtres et des saints</b><small>Saint Paul, saint Marc, saint Jacques, saint Laurent, saint André… (en semaine).</small></span>
+          </label>
+          <details class="cat-info">
+            <summary>À quoi ça sert ?</summary>
+            <p>Ce sont les fêtes des apôtres, des évangélistes et de quelques grands saints. Elles tombent en semaine, avec une messe plus simple (Gloria, mais pas de Credo) et une couleur propre : rouge pour les martyrs, blanc pour les autres. Utile si tu sers aussi la messe de semaine.</p>
+          </details>
+        </div>
       </fieldset>
       <p class="erreur" id="cat-erreur" hidden>Coche au moins une catégorie.</p>
       <div class="options">
