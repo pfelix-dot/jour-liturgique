@@ -238,7 +238,7 @@
     a.click();
     a.remove();
     setTimeout(function () { URL.revokeObjectURL(url); }, 10000);
-    $('ics-info').textContent = r.nb + ' rappels préparés, plus un rappel de renouvellement le dernier jour. Suis les étapes ci-dessous pour les ajouter à ton agenda.';
+    $('ics-info').textContent = r.nb + ' rappels préparés, plus un rappel de renouvellement le dernier jour. Ouvre le fichier téléchargé pour les ajouter à ton agenda.';
   };
   $('opt-categories').onchange = function () { $('cat-erreur').hidden = true; };
 

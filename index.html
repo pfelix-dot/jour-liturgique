@@ -164,17 +164,24 @@
       <button id="btn-ics" class="btn-principal" type="button">Télécharger pour mon agenda</button>
       <p class="texte petit" id="ics-info"></p>
 
-      <details>
-        <summary>Comment l’ajouter sur Android (Google Agenda)</summary>
+      <details open>
+        <summary>Comment l’ajouter sur Android</summary>
         <ol>
-          <li>Télécharge le fichier avec le bouton ci-dessus.</li>
-          <li>Dans Chrome, ouvre <b>calendar.google.com</b>, puis menu ⋮ › <b>Version pour ordinateur</b> (ou utilise un ordinateur).</li>
-          <li>Crée un agenda dédié : <b>Paramètres › Ajouter un agenda › Créer un agenda</b>, nommé « Jour liturgique ».</li>
-          <li>Dans les paramètres de ce nouvel agenda, section <b>Notifications d’événements</b> : choisis <b>Notification, 0 minute avant</b>.</li>
-          <li><b>Paramètres › Importer et exporter › Importer</b> : choisis le fichier téléchargé et l’agenda « Jour liturgique ».</li>
-          <li>Dans l’application Google Agenda, vérifie que l’agenda « Jour liturgique » est bien coché.</li>
+          <li>Touche <b>Télécharger pour mon agenda</b>.</li>
+          <li>Ouvre le fichier téléchargé : touche la notification de téléchargement, ou va dans <b>Mes fichiers › Téléchargements</b>.</li>
+          <li>Choisis l’application <b>Calendrier</b> de ton téléphone (par exemple Calendrier Samsung) et confirme l’ajout.</li>
         </ol>
-        <p class="texte petit">Google n’importe pas les alertes contenues dans le fichier : c’est le réglage de l’étape 4 qui déclenche la notification à l’heure choisie.</p>
+        <details class="autre-methode">
+          <summary>Ton téléphone ne propose pas d’agenda pour ouvrir le fichier ?</summary>
+          <p class="texte petit">L’application Google Agenda ne sait pas importer plusieurs événements d’un coup. Il faut passer une fois par le site de Google :</p>
+          <ol>
+            <li>Dans Chrome, ouvre <b>calendar.google.com</b>, puis menu ⋮ › <b>Version pour ordinateur</b> (ou utilise un ordinateur).</li>
+            <li>Crée un agenda dédié : <b>Paramètres › Ajouter un agenda › Créer un agenda</b>, nommé « Jour liturgique ».</li>
+            <li>Dans les paramètres de ce nouvel agenda, section <b>Notifications d’événements</b> : choisis <b>Notification, 0 minute avant</b>.</li>
+            <li><b>Paramètres › Importer et exporter › Importer</b> : choisis le fichier téléchargé et l’agenda « Jour liturgique ».</li>
+          </ol>
+          <p class="texte petit">Google n’importe pas les alertes contenues dans le fichier : c’est le réglage de l’étape 3 qui déclenche la notification à l’heure choisie.</p>
+        </details>
       </details>
       <details>
         <summary>Comment l’ajouter sur iPhone</summary>
