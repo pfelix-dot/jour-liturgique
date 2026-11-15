@@ -105,8 +105,8 @@
       n = 1 + Math.floor(diff(d, A.avent1) / 7);
       if (j === 0) {
         var ex = null;
-        if (n === 1) ex = { debut: 'Début de l’Avent et de la nouvelle année liturgique' };
-        if (n === 3) ex = { note: 'Dimanche de Gaudete' };
+        if (n === 1) ex = { debut: 'Début de l’Avent et de la nouvelle année liturgique', cle: 'avent1' };
+        if (n === 3) ex = { note: 'Dimanche de Gaudete', cle: 'gaudete' };
         return R(ordM(n) + ' dimanche de l’Avent', 'avent', n === 3 ? 'rose' : 'violet', 'Dimanche', 2, ex);
       }
       if (d.getUTCMonth() === 11 && d.getUTCDate() >= 17)
@@ -116,8 +116,8 @@
 
     // Noël (25 au 31 décembre)
     if (d >= A.noel) {
-      if (same(d, A.noel)) return R('Nativité du Seigneur (Noël)', 'noel', 'blanc', 'Solennité', 2, { debut: 'Début du temps de Noël' });
-      if (same(d, A.sainteFamille)) return R('La Sainte Famille de Jésus, Marie et Joseph', 'noel', 'blanc', 'Fête', 5);
+      if (same(d, A.noel)) return R('Nativité du Seigneur (Noël)', 'noel', 'blanc', 'Solennité', 2, { debut: 'Début du temps de Noël', cle: '12-25' });
+      if (same(d, A.sainteFamille)) return R('La Sainte Famille de Jésus, Marie et Joseph', 'noel', 'blanc', 'Fête', 5, { cle: 'sainte-famille' });
       k = d.getUTCDate() - 24;
       return R(JN + ', ' + ordM(k) + ' jour dans l’octave de Noël', 'noel', 'blanc', 'Octave de Noël', 9);
     }
@@ -125,9 +125,9 @@
     // Temps de Noël en janvier, jusqu'au Baptême du Seigneur
     if (d <= A.bap) {
       if (d.getUTCMonth() === 0 && d.getUTCDate() === 1)
-        return R('Sainte Marie, Mère de Dieu', 'noel', 'blanc', 'Solennité', 3, { note: 'Octave de Noël' });
-      if (same(d, A.epi)) return R('Épiphanie du Seigneur', 'noel', 'blanc', 'Solennité', 2);
-      if (same(d, A.bap)) return R('Baptême du Seigneur', 'noel', 'blanc', 'Fête', 5, { note: 'Fin du temps de Noël' });
+        return R('Sainte Marie, Mère de Dieu', 'noel', 'blanc', 'Solennité', 3, { note: 'Octave de Noël', cle: '01-01' });
+      if (same(d, A.epi)) return R('Épiphanie du Seigneur', 'noel', 'blanc', 'Solennité', 2, { cle: 'epiphanie' });
+      if (same(d, A.bap)) return R('Baptême du Seigneur', 'noel', 'blanc', 'Fête', 5, { note: 'Fin du temps de Noël', cle: 'bapteme' });
       if (d < A.epi) return R(JN + ' ' + d.getUTCDate() + ' janvier, temps de Noël', 'noel', 'blanc', 'Férie', 13);
       return R(JN + ' après l’Épiphanie', 'noel', 'blanc', 'Férie', 13);
     }
@@ -142,11 +142,11 @@
 
     // Carême
     if (d < A.rameaux) {
-      if (same(d, A.cendres)) return R('Mercredi des Cendres', 'careme', 'violet', 'Entrée en Carême', 2, { debut: 'Début du Carême' });
+      if (same(d, A.cendres)) return R('Mercredi des Cendres', 'careme', 'violet', 'Entrée en Carême', 2, { debut: 'Début du Carême', cle: 'cendres' });
       if (d < A.careme1) return R(JN + ' après les Cendres', 'careme', 'violet', 'Férie de Carême', 9);
       n = 1 + Math.floor(diff(d, A.careme1) / 7);
       if (j === 0) return R(ordM(n) + ' dimanche de Carême', 'careme', n === 4 ? 'rose' : 'violet', 'Dimanche', 2,
-        n === 4 ? { note: 'Dimanche de Laetare' } : null);
+        n === 4 ? { note: 'Dimanche de Laetare', cle: 'laetare' } : null);
       return R(JN + ' de la ' + ordF(n) + ' semaine de Carême', 'careme', 'violet', 'Férie de Carême', 9);
     }
 
@@ -154,35 +154,36 @@
     if (d < A.E) {
       k = diff(d, A.rameaux);
       if (k === 0) return R('Dimanche des Rameaux et de la Passion du Seigneur', 'semaine-sainte', 'rouge', 'Dimanche', 2,
-        { debut: 'Début de la Semaine sainte' });
+        { debut: 'Début de la Semaine sainte', cle: 'rameaux' });
       if (k <= 3) return R(JN + ' saint', 'semaine-sainte', 'violet', 'Semaine sainte', 2);
       if (k === 4) return R('Jeudi saint – la Cène du Seigneur', 'triduum', 'blanc', 'Triduum pascal', 1,
-        { debut: 'Le soir : début du Triduum pascal', note: 'Le soir : messe en mémoire de la Cène du Seigneur, en blanc. La messe chrismale est souvent célébrée ce matin-là ou un autre jour de la Semaine sainte, selon le diocèse.' });
+        { cle: 'jeudi-saint', debut: 'Le soir : début du Triduum pascal', note: 'Le soir : messe en mémoire de la Cène du Seigneur, en blanc. La messe chrismale est souvent célébrée ce matin-là ou un autre jour de la Semaine sainte, selon le diocèse.' });
       if (k === 5) return R('Vendredi saint – la Passion du Seigneur', 'triduum', 'rouge', 'Triduum pascal', 1,
-        { note: 'Pas de messe ce jour : célébration de la Passion du Seigneur, en rouge.' });
+        { note: 'Pas de messe ce jour : célébration de la Passion du Seigneur, en rouge.', cle: 'vendredi-saint' });
       return R('Samedi saint', 'triduum', 'aucune', 'Triduum pascal', 1,
-        { note: 'Pas de messe dans la journée. Le soir : Vigile pascale, en blanc.' });
+        { note: 'Pas de messe dans la journée. Le soir : Vigile pascale, en blanc.', cle: 'samedi-saint' });
     }
 
     // Temps pascal
     if (d <= A.pentecote) {
       k = diff(d, A.E);
-      if (k === 0) return R('Dimanche de Pâques – la Résurrection du Seigneur', 'paques', 'blanc', 'Solennité', 1, { debut: 'Début du temps pascal' });
-      if (k < 7) return R(JN + ' dans l’octave de Pâques', 'paques', 'blanc', 'Octave de Pâques', 2);
-      if (same(d, A.ascension)) return R('Ascension du Seigneur', 'paques', 'blanc', 'Solennité', 2);
-      if (same(d, A.pentecote)) return R('Pentecôte', 'paques', 'rouge', 'Solennité', 2, { note: 'Fin du temps pascal' });
+      if (k === 0) return R('Dimanche de Pâques – la Résurrection du Seigneur', 'paques', 'blanc', 'Solennité', 1, { debut: 'Début du temps pascal', cle: 'paques' });
+      if (k < 7) return R(JN + ' dans l’octave de Pâques', 'paques', 'blanc', 'Octave de Pâques', 2, { cle: 'octave-paques' });
+      if (same(d, A.ascension)) return R('Ascension du Seigneur', 'paques', 'blanc', 'Solennité', 2, { cle: 'ascension' });
+      if (same(d, A.pentecote)) return R('Pentecôte', 'paques', 'rouge', 'Solennité', 2, { note: 'Fin du temps pascal', cle: 'pentecote' });
       n = 1 + Math.floor(k / 7);
-      if (j === 0) return R(ordM(n) + ' dimanche de Pâques' + (n === 2 ? ' (de la Divine Miséricorde)' : ''), 'paques', 'blanc', 'Dimanche', 2);
+      if (j === 0) return R(ordM(n) + ' dimanche de Pâques' + (n === 2 ? ' (de la Divine Miséricorde)' : ''), 'paques', 'blanc', 'Dimanche', 2,
+        n === 2 ? { cle: 'misericorde' } : null);
       return R(JN + ' de la ' + ordF(n) + ' semaine de Pâques', 'paques', 'blanc', 'Férie', 13);
     }
 
     // Temps ordinaire, après la Pentecôte
     w = 34 - diff(A.christRoi, sundayOnOrBefore(d)) / 7;
-    if (same(d, A.trinite)) return R('La Sainte Trinité', 'ordinaire', 'blanc', 'Solennité', 3);
-    if (same(d, A.saintSacrement)) return R('Le Saint-Sacrement du Corps et du Sang du Christ', 'ordinaire', 'blanc', 'Solennité', 3);
-    if (same(d, A.sacreCoeur)) return R('Le Sacré-Cœur de Jésus', 'ordinaire', 'blanc', 'Solennité', 3);
+    if (same(d, A.trinite)) return R('La Sainte Trinité', 'ordinaire', 'blanc', 'Solennité', 3, { cle: 'trinite' });
+    if (same(d, A.saintSacrement)) return R('Le Saint-Sacrement du Corps et du Sang du Christ', 'ordinaire', 'blanc', 'Solennité', 3, { cle: 'saint-sacrement' });
+    if (same(d, A.sacreCoeur)) return R('Le Sacré-Cœur de Jésus', 'ordinaire', 'blanc', 'Solennité', 3, { cle: 'sacre-coeur' });
     if (same(d, A.christRoi)) return R('Le Christ, Roi de l’univers', 'ordinaire', 'blanc', 'Solennité', 3,
-      { note: 'Dernier dimanche de l’année liturgique' });
+      { note: 'Dernier dimanche de l’année liturgique', cle: 'christ-roi' });
     var deb2 = same(d, add(A.pentecote, 1)) ? { debut: 'Reprise du Temps ordinaire' } : null;
     if (j === 0) return R(ordM(w) + ' dimanche du Temps ordinaire', 'ordinaire', 'vert', 'Dimanche', 6);
     return R(JN + ' de la ' + ordF(w) + ' semaine du Temps ordinaire', 'ordinaire', 'vert', 'Férie', 13, deb2);
@@ -230,7 +231,8 @@
     var A = an(y), m = {};
     SANCT.forEach(function (s) {
       var d = D(y, s[0], s[1]);
-      var e = { titre: s[2], couleur: s[3], rang: s[4], prec: s[5] };
+      var e = { titre: s[2], couleur: s[3], rang: s[4], prec: s[5],
+        cle: (s[0] < 10 ? '0' : '') + s[0] + '-' + (s[1] < 10 ? '0' : '') + s[1] };
       var cible = d;
       if (s[4] === 'Solennité') {
         var empeche = temporal(d).prec <= 3;
@@ -259,10 +261,10 @@
     var s = sanctoral(y)[iso(d)];
     var c = {
       titre: t.titre, couleur: t.couleur, rang: t.rang, prec: t.prec,
-      temps: t.temps, note: t.note || null, debut: t.debut || null
+      temps: t.temps, note: t.note || null, debut: t.debut || null, cle: t.cle || null
     };
     if (s && s.prec < t.prec) {
-      c.titre = s.titre; c.couleur = s.couleur; c.rang = s.rang; c.prec = s.prec;
+      c.titre = s.titre; c.couleur = s.couleur; c.rang = s.rang; c.prec = s.prec; c.cle = s.cle;
       var notes = [];
       if (s.reportee) notes.push(s.reportee);
       if (dow(d) === 0) notes.push('Remplace le ' + t.titre.charAt(0).toLowerCase() + t.titre.slice(1) + '.');

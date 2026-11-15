@@ -16,6 +16,8 @@ sans mise à jour.
 
 ## Fichiers
 - `liturgie.js` : le calcul du calendrier
+- `explications.js` : les brèves explications des fêtes et les liens « En savoir plus »
+  (Église catholique en France, Nominis, Vatican News, AELF)
 - `app.js` : l'affichage et l'export agenda (.ics)
 - `sw.js` : le mode hors ligne
 - `manifest.webmanifest` et `icons/` : l'installation sur l'écran d'accueil
