@@ -96,6 +96,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .infos dt { width: 80px; flex: none; color: var(--sur-2); }
 .infos dd { margin: 0; display: flex; align-items: center; gap: 8px; }
 .pastille { display: none; }
+.explication { margin: 14px 0 0; font-size: 15px; line-height: 1.55; }
+.liens { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.liens a {
+  display: inline-block; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;
+  background: var(--voile); color: var(--sur); text-decoration: none; border: 1px solid var(--lc);
+}
 .note { margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--voile); font-size: 14px; }
 
 .bloc { background: var(--surface); border: 1px solid var(--bord); border-radius: 18px; padding: 16px; margin-bottom: 16px; }

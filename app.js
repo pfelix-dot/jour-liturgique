@@ -38,6 +38,22 @@
     $('debut').textContent = j.debut || '';
     $('note').hidden = !j.note;
     $('note').textContent = j.note || '';
+
+    // Brève explication et liens « En savoir plus »
+    var X = window.Explications;
+    var expl = X ? X.texte(j) : null;
+    $('explication').hidden = !expl;
+    $('explication').textContent = expl || '';
+    var zone = $('liens');
+    zone.textContent = '';
+    if (X) X.liens(j).forEach(function (l) {
+      var a = document.createElement('a');
+      a.href = l.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = l.nom + ' ↗';
+      zone.appendChild(a);
+    });
   }
 
   /* ---------- Mois en couleurs ---------- */
