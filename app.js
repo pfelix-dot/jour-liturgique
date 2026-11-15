@@ -219,8 +219,19 @@
     invite.userChoice.then(function () { invite = null; $('bloc-installer').hidden = true; });
   };
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
-    navigator.serviceWorker.register('sw.js');
+    // S'il y avait déjà une version installée, un changement de version = mise à jour disponible
+    var dejaInstallee = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (dejaInstallee && $('maj')) $('maj').hidden = false;
+    });
+    navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(function (reg) {
+      // Vérifier s'il y a du nouveau à chaque retour sur l'application
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible') reg.update().catch(function () {});
+      });
+    });
   }
+  if ($('btn-maj')) $('btn-maj').onclick = function () { location.reload(); };
 
   /* Au retour sur l'application un autre jour, revenir à aujourd'hui */
   var dernier = L.iso(aujourdhui());
