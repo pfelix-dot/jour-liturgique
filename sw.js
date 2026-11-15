@@ -5,7 +5,7 @@
  * ne répond pas en 4 secondes, on sert la copie gardée sur le téléphone.
  * Changer VERSION à chaque mise à jour.
  */
-var VERSION = 'jour-liturgique-v8';
+var VERSION = 'jour-liturgique-v9';
 var FICHIERS = [
   './', 'index.html', 'style.css', 'app.js', 'liturgie.js', 'explications.js', 'manifest.webmanifest',
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png'
