@@ -282,6 +282,14 @@
       ['Solennité', 'Commémoration', 'Triduum pascal', 'Entrée en Carême'].indexOf(c.rang) >= 0 ||
       (c.rang === 'Fête' && c.prec <= 5);
     c.feteSaint = c.rang === 'Fête' && c.prec === 7;
+    // Catégories utilisées pour choisir les rappels d'agenda (un jour peut en avoir plusieurs)
+    c.categories = [];
+    if (c.dimanche) c.categories.push('dimanche');
+    if (c.rang === 'Solennité') c.categories.push('solennite');
+    if (c.rang === 'Fête' && c.prec <= 5) c.categories.push('fete-seigneur');
+    if (['Entrée en Carême', 'Triduum pascal', 'Commémoration'].indexOf(c.rang) >= 0) c.categories.push('particulier');
+    if (c.debut) c.categories.push('debut');
+    if (c.feteSaint) c.categories.push('saint');
     return c;
   }
 

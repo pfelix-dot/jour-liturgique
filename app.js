@@ -135,7 +135,7 @@
     return { vert: 'vert', violet: 'violet', blanc: 'blanc', rouge: 'rouge', rose: 'rose', aucune: 'pas de messe le jour' }[j.couleur];
   }
 
-  function construireICS(annees, heure, avecSaints) {
+  function construireICS(annees, heure, categories) {
     var hh = heure.split(':')[0], mm = heure.split(':')[1];
     var debutH = deux(+hh) + deux(+mm) + '00';
     var finMin = (+hh) * 60 + (+mm) + 15;
@@ -145,10 +145,27 @@
       'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Jour liturgique//FR', 'CALSCALE:GREGORIAN',
       'METHOD:PUBLISH', 'X-WR-CALNAME:Jour liturgique'
     ];
+    function evenement(uid, date, resume, desc, url) {
+      lignes.push(
+        'BEGIN:VEVENT',
+        'UID:' + uid + '@jour-liturgique',
+        'DTSTAMP:' + stamp,
+        'DTSTART:' + date + 'T' + debutH,
+        'DTEND:' + date + 'T' + finH,
+        'SUMMARY:' + echapper(resume),
+        'DESCRIPTION:' + echapper(desc)
+      );
+      if (url) lignes.push('URL:' + url);
+      lignes.push(
+        'TRANSP:TRANSPARENT',
+        'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + echapper(resume), 'TRIGGER:PT0S', 'END:VALARM',
+        'END:VEVENT'
+      );
+    }
     var d = aujourdhui(), fin = L.add(d, Math.round(365.25 * annees)), nb = 0;
     for (; d < fin; d = L.add(d, 1)) {
       var j = L.jour(d);
-      if (!(j.important || (avecSaints && j.feteSaint))) continue;
+      if (!j.categories.some(function (c) { return categories.indexOf(c) >= 0; })) continue;
       var date = j.iso.replace(/-/g, '');
       var resume = (j.debut && j.rang === 'Férie' ? j.debut : j.titre) + ' (' + courteCouleur(j) + ')';
       var desc = [j.tempsLabel + ' · ' + j.rang, 'Couleur : ' + j.couleurLabel,
@@ -156,26 +173,26 @@
       if (j.debut) desc.push(j.debut);
       if (j.note) desc.push(j.note);
       desc.push('Calendrier romain, usages de la France. L\u2019Ordo de ton diocèse fait foi.');
-      lignes.push(
-        'BEGIN:VEVENT',
-        'UID:jl-' + date + '@jour-liturgique',
-        'DTSTAMP:' + stamp,
-        'DTSTART:' + date + 'T' + debutH,
-        'DTEND:' + date + 'T' + finH,
-        'SUMMARY:' + echapper(resume),
-        'DESCRIPTION:' + echapper(desc.join('\n')),
-        'TRANSP:TRANSPARENT',
-        'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + echapper(resume), 'TRIGGER:PT0S', 'END:VALARM',
-        'END:VEVENT'
-      );
+      evenement('jl-' + date, date, resume, desc.join('\n'));
       nb++;
     }
+    // Dernier jour : rappel pour revenir télécharger la suite
+    var dernier = L.add(fin, -1), adresse = location.origin + location.pathname;
+    evenement('jl-renouveler-' + L.iso(dernier).replace(/-/g, ''), L.iso(dernier).replace(/-/g, ''),
+      'Renouveler mes rappels Jour liturgique',
+      'Tes rappels liturgiques s’arrêtent aujourd’hui.\nOuvre l’application Jour liturgique (' + adresse +
+      ') et touche « Télécharger pour mon agenda » pour recevoir les rappels des années suivantes.',
+      adresse);
     lignes.push('END:VCALENDAR');
     return { texte: lignes.map(plier).join('\r\n') + '\r\n', nb: nb };
   }
 
   $('btn-ics').onclick = function () {
-    var r = construireICS(+$('opt-annees').value, $('opt-heure').value || '06:00', $('opt-saints').checked);
+    var cats = Array.prototype.map.call(
+      document.querySelectorAll('#opt-categories input:checked'), function (c) { return c.value; });
+    if (!cats.length) { $('cat-erreur').hidden = false; $('ics-info').textContent = ''; return; }
+    $('cat-erreur').hidden = true;
+    var r = construireICS(+$('opt-annees').value, $('opt-heure').value || '06:00', cats);
     var blob = new Blob([r.texte], { type: 'text/calendar;charset=utf-8' });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
@@ -185,8 +202,9 @@
     a.click();
     a.remove();
     setTimeout(function () { URL.revokeObjectURL(url); }, 10000);
-    $('ics-info').textContent = r.nb + ' événements préparés. Suis les étapes ci-dessous pour les ajouter à ton agenda.';
+    $('ics-info').textContent = r.nb + ' rappels préparés, plus un rappel de renouvellement le dernier jour. Suis les étapes ci-dessous pour les ajouter à ton agenda.';
   };
+  $('opt-categories').onchange = function () { $('cat-erreur').hidden = true; };
 
   /* ---------- Installation et mode hors ligne ---------- */
   var invite = null;
