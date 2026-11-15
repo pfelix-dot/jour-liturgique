@@ -9,7 +9,8 @@
 
   --lc-vert: #3B7D23;     --lt-vert: #E6F1DC;
   --lc-violet: #6B3FA0;   --lt-violet: #EEE6F7;
-  --lc-blanc: #C9A227;    --lt-blanc: #FBF6E4;
+  --lc-blanc: #CFCBC0;    --lt-blanc: #FFFFFF;
+  --or: #C9A227;
   --lc-rouge: #B3261E;    --lt-rouge: #F8E1DF;
   --lc-rose: #D9679A;     --lt-rose: #FBE3EE;
   --lc-aucune: #8A8580;   --lt-aucune: #ECEAE5;
@@ -26,7 +27,8 @@
 
     --lc-vert: #7BC05A;     --lt-vert: #24361B;
     --lc-violet: #B194E0;   --lt-violet: #2F2540;
-    --lc-blanc: #E5C561;    --lt-blanc: #3A3420;
+    --lc-blanc: #B4B2A9;    --lt-blanc: #F4F2EC;
+    --or: #E5C561;
     --lc-rouge: #EF7A72;    --lt-rouge: #45201D;
     --lc-rose: #F09BC0;     --lt-rose: #45253A;
     --lc-aucune: #A8A49E;   --lt-aucune: #33322F;
@@ -70,6 +72,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
 [data-couleur="rose"]   { --lc: var(--lc-rose);   --lt: var(--lt-rose); }
 [data-couleur="aucune"] { --lc: var(--lc-aucune); --lt: var(--lt-aucune); }
 
+/* Jours blancs : fond blanc, et texte sombre même en mode sombre */
+.carte[data-couleur="blanc"], .case-jour[data-couleur="blanc"] {
+  --texte: #1F1E1B; --texte-2: #5F5E5A; --surface: #F6F4EE; --bord: #DDD9CF;
+  color: var(--texte);
+}
+[data-couleur="blanc"] .pastille { background: #FFFFFF; border-color: #A8A49E; }
+
 .carte {
   position: relative; overflow: hidden;
   background: var(--lt); border: 1px solid var(--bord); border-radius: 18px;
@@ -112,9 +121,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .case-jour.auj::after {
   content: ""; position: absolute; bottom: 7px; width: 5px; height: 5px; border-radius: 50%; background: var(--texte);
 }
-.case-jour .etoile { position: absolute; top: 1px; right: 4px; font-size: 10px; color: var(--lc); }
+.case-jour .etoile { position: absolute; top: 1px; right: 4px; font-size: 10px; color: var(--or); }
 .legende { margin: 8px 0 0; font-size: 12px; color: var(--texte-2); }
-.legende .etoile { color: var(--lc-blanc); }
+.legende .etoile { color: var(--or); }
 
 .avenir { list-style: none; margin: 0; padding: 0; }
 .avenir li { border-top: 1px solid var(--bord); }

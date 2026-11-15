@@ -1,5 +1,5 @@
 /* Mode hors ligne : on sert les fichiers depuis le cache, puis on les met à jour en arrière-plan. */
-var VERSION = 'jour-liturgique-v1';
+var VERSION = 'jour-liturgique-v2';
 var FICHIERS = [
   './', 'index.html', 'style.css', 'app.js', 'liturgie.js', 'manifest.webmanifest',
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png'
