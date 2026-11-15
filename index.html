@@ -28,6 +28,9 @@
       <button id="btn-maj" type="button">Actualiser</button>
     </div>
 
+    <!-- ===== Onglet Calendrier ===== -->
+    <div class="vue" id="vue-calendrier">
+
     <!-- Carte du jour -->
     <section class="carte" id="carte" aria-live="polite">
       <div class="bande"></div>
@@ -73,8 +76,12 @@
       <ul class="avenir" id="avenir"></ul>
     </section>
 
-    <!-- Agenda -->
+    </div>
+
+    <!-- ===== Onglet Rappels ===== -->
+    <div class="vue" id="vue-rappels" hidden>
     <section class="bloc">
+      <h2 class="titre-vue">Rappels dans mon agenda</h2>
       <h3>Une alerte chaque matin</h3>
       <p class="texte">Ajoute les jours de ton choix à l’agenda de ton téléphone. Il te préviendra à l’heure choisie.</p>
       <fieldset class="categories" id="opt-categories">
@@ -179,6 +186,7 @@
       </details>
       <p class="texte petit">Tu peux recommencer plus tard pour prolonger : les événements déjà présents sont mis à jour, sans doublon dans la plupart des agendas.</p>
     </section>
+    </div>
 
     <section class="bloc installer" id="bloc-installer" hidden>
       <h3>Installer l’application</h3>
@@ -186,6 +194,17 @@
       <button id="btn-installer" class="btn-principal" type="button">Installer</button>
     </section>
   </main>
+
+  <nav class="onglets" aria-label="Sections de l’application">
+    <a class="onglet" id="onglet-calendrier" href="#calendrier">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M12 13v5M9.5 15h5"/></svg>
+      Calendrier
+    </a>
+    <a class="onglet" id="onglet-rappels" href="#rappels">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+      Rappels
+    </a>
+  </nav>
 
   <footer>
     <p>Calcul selon le calendrier romain général et les usages de la France. Les mémoires des saints et les fêtes propres à ton diocèse ou à ta paroisse ne sont pas incluses. En cas de doute, l’Ordo de ton diocèse fait foi.</p>

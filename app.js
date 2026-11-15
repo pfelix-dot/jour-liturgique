@@ -111,7 +111,27 @@
 
   $('jour-prec').onclick = function () { choisir(L.add(etat.sel, -1)); };
   $('jour-suiv').onclick = function () { choisir(L.add(etat.sel, 1)); };
-  $('btn-aujourdhui').onclick = function () { choisir(aujourdhui()); };
+  $('btn-aujourdhui').onclick = function () {
+    if (location.hash === '#rappels') location.hash = '#calendrier';
+    choisir(aujourdhui());
+  };
+
+  /* ---------- Onglets Calendrier / Rappels ---------- */
+  function afficherVue() {
+    var rappels = location.hash === '#rappels';
+    $('vue-calendrier').hidden = rappels;
+    $('vue-rappels').hidden = !rappels;
+    if (rappels) {
+      $('onglet-rappels').setAttribute('aria-current', 'page');
+      $('onglet-calendrier').removeAttribute('aria-current');
+    } else {
+      $('onglet-calendrier').setAttribute('aria-current', 'page');
+      $('onglet-rappels').removeAttribute('aria-current');
+    }
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', afficherVue);
+  afficherVue();
   $('date-choix').onchange = function (e) { if (e.target.value) choisir(L.fromISO(e.target.value)); };
   $('mois-prec').onclick = function () {
     etat.mois = L.D(etat.mois.getUTCFullYear(), etat.mois.getUTCMonth(), 1); afficherMois();
@@ -193,7 +213,7 @@
       nb++;
     }
     // Dernier jour : rappel pour revenir télécharger la suite
-    var dernier = L.add(fin, -1), adresse = location.origin + location.pathname;
+    var dernier = L.add(fin, -1), adresse = location.origin + location.pathname + '#rappels';
     evenement('jl-renouveler-' + L.iso(dernier).replace(/-/g, ''), L.iso(dernier).replace(/-/g, ''),
       'Renouveler mes rappels Jour liturgique',
       'Tes rappels liturgiques s’arrêtent aujourd’hui.\nOuvre l’application Jour liturgique (' + adresse +
