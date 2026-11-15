@@ -47,6 +47,15 @@ button { font: inherit; color: inherit; cursor: pointer; }
   width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--bord);
   background: var(--surface); font-size: 22px; line-height: 1; flex: none;
 }
+.maj {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: var(--accent); color: var(--accent-texte); border-radius: 14px;
+  padding: 10px 12px 10px 16px; margin-bottom: 12px; font-weight: 500;
+}
+.maj button {
+  border: 0; border-radius: 999px; padding: 6px 14px; font-weight: 600;
+  background: var(--accent-texte); color: var(--accent);
+}
 .btn-principal {
   width: 100%; padding: 12px 16px; border: 0; border-radius: 12px;
   background: var(--accent); color: var(--accent-texte); font-weight: 600; font-size: 16px;
