@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jour liturgique</title>
+  <meta name="description" content="Le jour du calendrier liturgique catholique, sa couleur et les grandes fêtes à venir.">
+  <meta name="theme-color" content="#27500A">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Jour liturgique">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="entete">
+    <img src="icons/icon.svg" alt="" width="32" height="32">
+    <h1>Jour liturgique</h1>
+    <button id="btn-aujourdhui" class="btn-discret" type="button">Aujourd’hui</button>
+  </header>
+
+  <main>
+    <!-- Carte du jour -->
+    <section class="carte" id="carte" aria-live="polite">
+      <div class="bande"></div>
+      <div class="nav-jour">
+        <button id="jour-prec" class="btn-rond" type="button" aria-label="Jour précédent">‹</button>
+        <label class="choix-date">
+          <span id="date-long"></span>
+          <input type="date" id="date-choix" aria-label="Choisir une date">
+        </label>
+        <button id="jour-suiv" class="btn-rond" type="button" aria-label="Jour suivant">›</button>
+      </div>
+      <p class="badge-auj" id="badge-auj">Aujourd’hui</p>
+      <h2 id="titre"></h2>
+      <p class="rang" id="rang"></p>
+      <dl class="infos">
+        <div><dt>Temps</dt><dd id="temps"></dd></div>
+        <div><dt>Couleur</dt><dd><span class="pastille" id="pastille"></span><span id="couleur"></span></dd></div>
+        <div><dt>Lectures</dt><dd id="annee"></dd></div>
+      </dl>
+      <p class="note" id="debut" hidden></p>
+      <p class="note" id="note" hidden></p>
+    </section>
+
+    <!-- Mois en couleurs -->
+    <section class="bloc">
+      <div class="nav-mois">
+        <button id="mois-prec" class="btn-rond" type="button" aria-label="Mois précédent">‹</button>
+        <h3 id="mois-titre"></h3>
+        <button id="mois-suiv" class="btn-rond" type="button" aria-label="Mois suivant">›</button>
+      </div>
+      <div class="grille entetes" aria-hidden="true">
+        <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+      </div>
+      <div class="grille" id="grille" role="grid"></div>
+      <p class="legende"><span class="etoile">★</span> solennité ou grande fête</p>
+    </section>
+
+    <!-- À venir -->
+    <section class="bloc">
+      <h3>À venir</h3>
+      <ul class="avenir" id="avenir"></ul>
+    </section>
+
+    <!-- Agenda -->
+    <section class="bloc">
+      <h3>Une alerte chaque matin</h3>
+      <p class="texte">Ajoute les dimanches, les débuts de temps et les grandes fêtes à l’agenda de ton téléphone. Il te préviendra à l’heure choisie.</p>
+      <div class="options">
+        <label>Heure de l’alerte
+          <input type="time" id="opt-heure" value="06:00">
+        </label>
+        <label>Durée
+          <select id="opt-annees">
+            <option value="1">1 an</option>
+            <option value="3">3 ans</option>
+            <option value="5" selected>5 ans</option>
+          </select>
+        </label>
+        <label class="case">
+          <input type="checkbox" id="opt-saints">
+          Ajouter aussi les fêtes des apôtres et des saints
+        </label>
+      </div>
+      <button id="btn-ics" class="btn-principal" type="button">Télécharger pour mon agenda</button>
+      <p class="texte petit" id="ics-info"></p>
+
+      <details>
+        <summary>Comment l’ajouter sur Android (Google Agenda)</summary>
+        <ol>
+          <li>Télécharge le fichier avec le bouton ci-dessus.</li>
+          <li>Dans Chrome, ouvre <b>calendar.google.com</b>, puis menu ⋮ › <b>Version pour ordinateur</b> (ou utilise un ordinateur).</li>
+          <li>Crée un agenda dédié : <b>Paramètres › Ajouter un agenda › Créer un agenda</b>, nommé « Jour liturgique ».</li>
+          <li>Dans les paramètres de ce nouvel agenda, section <b>Notifications d’événements</b> : choisis <b>Notification, 0 minute avant</b>.</li>
+          <li><b>Paramètres › Importer et exporter › Importer</b> : choisis le fichier téléchargé et l’agenda « Jour liturgique ».</li>
+          <li>Dans l’application Google Agenda, vérifie que l’agenda « Jour liturgique » est bien coché.</li>
+        </ol>
+        <p class="texte petit">Google n’importe pas les alertes contenues dans le fichier : c’est le réglage de l’étape 4 qui déclenche la notification à l’heure choisie.</p>
+      </details>
+      <details>
+        <summary>Comment l’ajouter sur iPhone</summary>
+        <ol>
+          <li>Ouvre cette application dans Safari et touche le bouton ci-dessus.</li>
+          <li>Ouvre le fichier téléchargé (bannière de téléchargement ou application Fichiers).</li>
+          <li>Touche <b>Tout ajouter</b> et choisis un calendrier. Les alertes sont incluses.</li>
+        </ol>
+      </details>
+      <p class="texte petit">Tu peux recommencer plus tard pour prolonger : les événements déjà présents sont mis à jour, sans doublon dans la plupart des agendas.</p>
+    </section>
+
+    <section class="bloc installer" id="bloc-installer" hidden>
+      <h3>Installer l’application</h3>
+      <p class="texte">Ajoute « Jour liturgique » à l’écran d’accueil pour l’ouvrir comme une application, même sans connexion.</p>
+      <button id="btn-installer" class="btn-principal" type="button">Installer</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Calcul selon le calendrier romain général et les usages de la France. Les mémoires des saints et les fêtes propres à ton diocèse ou à ta paroisse ne sont pas incluses. En cas de doute, l’Ordo de ton diocèse fait foi.</p>
+  </footer>
+
+  <script src="liturgie.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
