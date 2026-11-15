@@ -169,6 +169,8 @@ details { margin-top: 12px; border-top: 1px solid var(--bord); padding-top: 10px
 summary { cursor: pointer; font-weight: 500; }
 details ol { padding-left: 20px; margin: 10px 0; font-size: 14px; }
 details li { margin-bottom: 6px; }
+details.autre-methode { margin: 4px 0 4px; padding-top: 8px; }
+details.autre-methode summary { font-size: 14px; color: var(--texte-2); }
 
 footer { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
 
